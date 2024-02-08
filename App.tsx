@@ -28,8 +28,15 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+
 import { useAppSelector, useAppDispatch } from './app/hooks';
 import { decrement, increment } from './features/counter/counterSlice';
+import MenuContent from './components/MenuContent';
+import TextPage from './src/screens/Menu/TextPage';
+import TabPage from './src/screens/Menu/TabPage';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -61,7 +68,42 @@ function Section({children, title}: SectionProps): React.JSX.Element {
   );
 }
 
+const Drawer = createDrawerNavigator();
+
+function MyDrawer() {
+  return (
+    <Drawer.Navigator
+    screenOptions={{headerShown: true}}
+    drawerContent={(props) => <MenuContent {...props} />}
+   >
+     <Drawer.Screen name='Page 1' children={()=><TextPage text={"Page 1"}/>} />
+     <Drawer.Screen name='Page 2' children={()=><TextPage text={"Page 2"}/>} />
+     <Drawer.Screen name='Page 3' component={TabPage} />
+   </Drawer.Navigator>
+  );
+}
+
 function App(): React.JSX.Element {
+  const isDarkMode = useColorScheme() === 'dark';
+
+  const backgroundStyle = {
+    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  };
+
+  return (
+    <SafeAreaProvider>
+        <NavigationContainer>
+          <MyDrawer/>
+        </NavigationContainer>
+        <StatusBar
+          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+          backgroundColor={backgroundStyle.backgroundColor}
+        />
+    </SafeAreaProvider>
+  );
+}
+
+function OldApp(): React.JSX.Element {
   const count = useAppSelector((state) => state.counter.value)
   const dispatch = useAppDispatch()
 
@@ -72,51 +114,53 @@ function App(): React.JSX.Element {
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Redux Counter">
-            <View style={styles.fixToText}>
-              <Pressable
-                style={styles.button}
-                onPress={() => dispatch(decrement())}>
-                 <Text style={styles.text}>-</Text>
-              </Pressable>
-              <Text style={styles.counter}>{count}</Text>
-              <Pressable
-                style={styles.button}
-                onPress={() => dispatch(increment())}>
-                <Text style={styles.text}>+</Text>
-              </Pressable>
-            </View>
-          </Section>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <NavigationContainer>
+      <SafeAreaView style={backgroundStyle}>
+        <StatusBar
+          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+          backgroundColor={backgroundStyle.backgroundColor}
+        />
+        <ScrollView
+          contentInsetAdjustmentBehavior="automatic"
+          style={backgroundStyle}>
+          <Header />
+          <View
+            style={{
+              backgroundColor: isDarkMode ? Colors.black : Colors.white,
+            }}>
+            <Section title="Redux Counter">
+              <View style={styles.fixToText}>
+                <Pressable
+                  style={styles.button}
+                  onPress={() => dispatch(decrement())}>
+                  <Text style={styles.text}>-</Text>
+                </Pressable>
+                <Text style={styles.counter}>{count}</Text>
+                <Pressable
+                  style={styles.button}
+                  onPress={() => dispatch(increment())}>
+                  <Text style={styles.text}>+</Text>
+                </Pressable>
+              </View>
+            </Section>
+            <Section title="Step One">
+              Edit <Text style={styles.highlight}>App.tsx</Text> to change this
+              screen and then come back to see your edits.
+            </Section>
+            <Section title="See Your Changes">
+              <ReloadInstructions />
+            </Section>
+            <Section title="Debug">
+              <DebugInstructions />
+            </Section>
+            <Section title="Learn More">
+              Read the docs to discover what to do next:
+            </Section>
+            <LearnMoreLinks />
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    </NavigationContainer>
   );
 }
 
