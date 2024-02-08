@@ -5,9 +5,12 @@
  * @format
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import type {PropsWithChildren} from 'react';
 import {
+  Alert,
+  Button,
+  Pressable,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -24,6 +27,9 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+
+import { useAppSelector, useAppDispatch } from './app/hooks';
+import { decrement, increment } from './features/counter/counterSlice';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -56,6 +62,9 @@ function Section({children, title}: SectionProps): React.JSX.Element {
 }
 
 function App(): React.JSX.Element {
+  const count = useAppSelector((state) => state.counter.value)
+  const dispatch = useAppDispatch()
+
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -76,6 +85,21 @@ function App(): React.JSX.Element {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
+          <Section title="Redux Counter">
+            <View style={styles.fixToText}>
+              <Pressable
+                style={styles.button}
+                onPress={() => dispatch(decrement())}>
+                 <Text style={styles.text}>-</Text>
+              </Pressable>
+              <Text style={styles.counter}>{count}</Text>
+              <Pressable
+                style={styles.button}
+                onPress={() => dispatch(increment())}>
+                <Text style={styles.text}>+</Text>
+              </Pressable>
+            </View>
+          </Section>
           <Section title="Step One">
             Edit <Text style={styles.highlight}>App.tsx</Text> to change this
             screen and then come back to see your edits.
@@ -112,6 +136,34 @@ const styles = StyleSheet.create({
   },
   highlight: {
     fontWeight: '700',
+  },
+  fixToText: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  button: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 4,
+    elevation: 3,
+    backgroundColor: 'black',
+    height: 60,
+  },
+  text: {
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: 'bold',
+    letterSpacing: 0.25,
+    color: 'white',
+  },
+  counter: {
+    fontSize: 24,
+    fontWeight: '600',
+    marginTop: 20,
+    marginLeft: 75,
+    marginRight: 75
   },
 });
 
