@@ -1,15 +1,22 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 import base from '../../config/base';
+import { DrawerScreenProps } from '@react-navigation/drawer';
+import { RootStackParamList } from '../../../App';
 
-interface ITextPageProps {
+export interface ITextPageProps {
     text: string
 }
 
-const TextPage: React.FunctionComponent<ITextPageProps> = (props) => {
+type Props = DrawerScreenProps<RootStackParamList>;
+
+const TextPage: React.FunctionComponent<Props> = ({navigation, route}) => {
+
+  const {text} = route.params as ITextPageProps
+  
   return (
     <View style={base.centered}>
-      <Text>{props.text}</Text>
+      <Text>{text}</Text>
     </View>
   );
 };

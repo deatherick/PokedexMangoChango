@@ -1,16 +1,31 @@
 import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import TextPage from './TextPage';
+import { RootStackParamList } from '../../../App';
+import { DrawerScreenProps } from '@react-navigation/drawer';
 
-interface ITabPageProps {}
+export interface ITabPageProps {
+  tabs: Array<ITabProps>
+}
 
-const Tab = createMaterialTopTabNavigator();
+interface ITabProps {
+  name: keyof RootStackParamList
+  text: string
+}
 
-const TabPage: React.FunctionComponent<ITabPageProps> = (props) => {
+const Tab = createMaterialTopTabNavigator<RootStackParamList>();
+
+type Props = DrawerScreenProps<RootStackParamList>;
+
+const TabPage: React.FunctionComponent<Props> = ({route, navigation}) => {
+
+  const {tabs}  = route.params as ITabPageProps
+
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Tab 1" children={(props) => <TextPage text={'Tab 1'} {...props} />} />
-      <Tab.Screen name="Tab 2" children={(props) => <TextPage text={'Tab 2'} {...props} />} />
+       {tabs.map(tab => (
+            <Tab.Screen key={tab.name} name={tab.name} component={TextPage} initialParams={{text: tab.text}} /> 
+        ))}
     </Tab.Navigator>
   );
 };
