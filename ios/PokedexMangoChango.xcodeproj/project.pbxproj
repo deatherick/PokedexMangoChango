@@ -14,6 +14,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-PokedexMangoChango-PokedexMangoChangoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-PokedexMangoChango-PokedexMangoChangoTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		BE0406272B76E31D00C39142 /* AppIcon.appiconset in Resources */ = {isa = PBXBuildFile; fileRef = BE0406262B76E31D00C39142 /* AppIcon.appiconset */; };
 		BE6F47D02B76D44E00ADF9AC /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE6F47CF2B76D44E00ADF9AC /* BootSplash.storyboard */; };
 		BE6F47D22B76D58900ADF9AC /* BootSplashLogo.imageset in Resources */ = {isa = PBXBuildFile; fileRef = BE6F47D12B76D58900ADF9AC /* BootSplashLogo.imageset */; };
 /* End PBXBuildFile section */
@@ -45,6 +46,7 @@
 		5DCACB8F33CDC322A6C60F78 /* libPods-PokedexMangoChango.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PokedexMangoChango.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = PokedexMangoChango/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-PokedexMangoChango-PokedexMangoChangoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokedexMangoChango-PokedexMangoChangoTests.release.xcconfig"; path = "Target Support Files/Pods-PokedexMangoChango-PokedexMangoChangoTests/Pods-PokedexMangoChango-PokedexMangoChangoTests.release.xcconfig"; sourceTree = "<group>"; };
+		BE0406262B76E31D00C39142 /* AppIcon.appiconset */ = {isa = PBXFileReference; lastKnownFileType = folder; name = AppIcon.appiconset; path = PokedexMangoChango/Images.xcassets/AppIcon.appiconset; sourceTree = "<group>"; };
 		BE6F47CF2B76D44E00ADF9AC /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = PokedexMangoChango/BootSplash.storyboard; sourceTree = "<group>"; };
 		BE6F47D12B76D58900ADF9AC /* BootSplashLogo.imageset */ = {isa = PBXFileReference; lastKnownFileType = folder; name = BootSplashLogo.imageset; path = PokedexMangoChango/Images.xcassets/BootSplashLogo.imageset; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -90,6 +92,7 @@
 		13B07FAE1A68108700A75B9A /* PokedexMangoChango */ = {
 			isa = PBXGroup;
 			children = (
+				BE0406262B76E31D00C39142 /* AppIcon.appiconset */,
 				BE6F47CF2B76D44E00ADF9AC /* BootSplash.storyboard */,
 				BE6F47D12B76D58900ADF9AC /* BootSplashLogo.imageset */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -250,6 +253,7 @@
 				BE6F47D22B76D58900ADF9AC /* BootSplashLogo.imageset in Resources */,
 				BE6F47D02B76D44E00ADF9AC /* BootSplash.storyboard in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				BE0406272B76E31D00C39142 /* AppIcon.appiconset in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
