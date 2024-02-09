@@ -5,7 +5,7 @@
  * @format
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import type {PropsWithChildren} from 'react';
 import {
   Pressable,
@@ -35,6 +35,7 @@ import { decrement, increment } from './features/counter/counterSlice';
 import MenuContent from './components/MenuContent';
 import TextPage, { ITextPageProps } from './src/screens/Menu/TextPage';
 import TabPage, { ITabPageProps } from './src/screens/Menu/TabPage';
+import BootSplash from "react-native-bootsplash";
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -96,11 +97,24 @@ function MyDrawer() {
 }
 
 function App(): React.JSX.Element {
+
+  useEffect(() => {
+    const init = async () => {
+      // …do multiple sync or async tasks
+    };
+
+    init().finally(async () => {
+      await BootSplash.hide({ fade: true });
+      console.log("BootSplash has been hidden successfully");
+    });
+  }, []);
+
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+
 
   return (
     <SafeAreaProvider>
