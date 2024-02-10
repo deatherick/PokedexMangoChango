@@ -37,7 +37,7 @@ const HomeScreen: React.FunctionComponent<Props> = ({route, navigation}) => {
       tabBarIndicatorStyle:{
         backgroundColor: '#78a7c2'
       }
-    }}>
+    }}> 
         <Tab.Screen name='Pokemons' component={PokemonsListScreen} /> 
         <Tab.Screen name='Abilities' component={AbilitiesListScreen} /> 
         <Tab.Screen name='Moves' component={MovesListScreen} /> 

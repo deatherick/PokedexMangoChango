@@ -34,11 +34,12 @@ import { useAppSelector, useAppDispatch } from './src/store/hooks';
 import { decrement, increment } from './src/store/counter/counterSlice';
 import MenuContent from './src/components/MenuContent';
 import BootSplash from "react-native-bootsplash";
-import HomeScreen, { IHomeScreenProps } from './src/screens/Menu/HomeScreen';
+import { IHomeScreenProps } from './src/screens/Menu/HomeScreen';
 import { IPokemonsListScreenProps } from './src/screens/Pokemons/PokemonsListScreen';
 import { IAbilitiesListScreenProps } from './src/screens/Abilities/AbilitiesListScreen';
 import { IMovesListScreenProps } from './src/screens/Moves/MovesListScreen';
 import { IItemsListScreenProps } from './src/screens/Items/ItemsListScreen';
+import BottomTabContainer from './src/components/BottomTabContainer';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -76,6 +77,7 @@ export type RootStackParamList = {
   'Abilities': IAbilitiesListScreenProps
   'Moves': IMovesListScreenProps
   'Items': IItemsListScreenProps
+  'Bottom': React.FunctionComponent
 };
 
 const Drawer = createDrawerNavigator<RootStackParamList>();
@@ -91,11 +93,11 @@ function MyDrawer() {
         headerStyle: {
           backgroundColor: '#78a7c2',
         }}}
-      initialRouteName='Home'
+      initialRouteName='Bottom'
       drawerContent={(props) => <MenuContent {...props} /> }
    >
-      <Drawer.Screen name="Home" options={{title:"Home"}} component={HomeScreen} />
-   </Drawer.Navigator>
+    <Drawer.Screen name="Bottom" options={{title:"Home"}} component={BottomTabContainer} />
+  </Drawer.Navigator>
   );
 }
 
