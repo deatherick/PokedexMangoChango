@@ -12,7 +12,7 @@ const MenuContent: React.FunctionComponent<DrawerContentComponentProps> = (props
       <Image
         resizeMode='stretch'
         style={{width: '100%', height: 120, backgroundColor:"black"}}
-        source={require('../assets/drawerHeaderImage.png')}
+        source={require('../../assets/drawerHeaderImage.png')}
       />
       <DrawerItemList {...props} />
     </DrawerContentScrollView>

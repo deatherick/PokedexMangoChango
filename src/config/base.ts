@@ -6,5 +6,15 @@ export default StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'white',
+  },
+  card: {
+    flex: 1,
+    //marginTop: 8,
+    backgroundColor: 'white',
+  },
+  box: {
+    width: "auto",
+    height: 100,
   },
 });

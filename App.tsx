@@ -32,7 +32,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 import { useAppSelector, useAppDispatch } from './src/store/hooks';
 import { decrement, increment } from './src/store/counter/counterSlice';
-import MenuContent from './components/MenuContent';
+import MenuContent from './src/components/MenuContent';
 import BootSplash from "react-native-bootsplash";
 import HomeScreen, { IHomeScreenProps } from './src/screens/Menu/HomeScreen';
 import { IPokemonsListScreenProps } from './src/screens/Pokemons/PokemonsListScreen';
@@ -83,11 +83,18 @@ const Drawer = createDrawerNavigator<RootStackParamList>();
 function MyDrawer() {
   return (
     <Drawer.Navigator
-      screenOptions={{headerShown: true, drawerPosition: 'right',  }}
+      screenOptions={{
+        headerShown: true, 
+        headerTintColor: "white",
+        headerTitleAlign:"left",
+        headerTitle:"Your Pokédex",
+        headerStyle: {
+          backgroundColor: '#78a7c2',
+        }}}
       initialRouteName='Home'
       drawerContent={(props) => <MenuContent {...props} /> }
    >
-      <Drawer.Screen name="Home" component={HomeScreen} />
+      <Drawer.Screen name="Home" options={{title:"Home"}} component={HomeScreen} />
    </Drawer.Navigator>
   );
 }
