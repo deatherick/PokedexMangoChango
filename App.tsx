@@ -30,12 +30,15 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
-import { useAppSelector, useAppDispatch } from './app/hooks';
-import { decrement, increment } from './features/counter/counterSlice';
+import { useAppSelector, useAppDispatch } from './src/store/hooks';
+import { decrement, increment } from './src/store/counter/counterSlice';
 import MenuContent from './components/MenuContent';
-import TextPage, { ITextPageProps } from './src/screens/Menu/TextPage';
-import TabPage, { ITabPageProps } from './src/screens/Menu/TabPage';
 import BootSplash from "react-native-bootsplash";
+import HomeScreen, { IHomeScreenProps } from './src/screens/Menu/HomeScreen';
+import { IPokemonsListScreenProps } from './src/screens/Pokemons/PokemonsListScreen';
+import { IAbilitiesListScreenProps } from './src/screens/Abilities/AbilitiesListScreen';
+import { IMovesListScreenProps } from './src/screens/Moves/MovesListScreen';
+import { IItemsListScreenProps } from './src/screens/Items/ItemsListScreen';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -68,12 +71,11 @@ function Section({children, title}: SectionProps): React.JSX.Element {
 }
 
 export type RootStackParamList = {
-  'Page 1': ITextPageProps;
-  'Page 2': ITextPageProps;
-  'Tabs': ITabPageProps;
-  'Tab 1': ITextPageProps;
-  'Tab 2': ITextPageProps;
-  'Tab 3': ITextPageProps;
+  'Home': IHomeScreenProps
+  'Pokemons': IPokemonsListScreenProps
+  'Abilities': IAbilitiesListScreenProps
+  'Moves': IMovesListScreenProps
+  'Items': IItemsListScreenProps
 };
 
 const Drawer = createDrawerNavigator<RootStackParamList>();
@@ -81,17 +83,11 @@ const Drawer = createDrawerNavigator<RootStackParamList>();
 function MyDrawer() {
   return (
     <Drawer.Navigator
-    screenOptions={{headerShown: true}}
-    drawerContent={(props) => <MenuContent {...props} />}
+      screenOptions={{headerShown: true, drawerPosition: 'right',  }}
+      initialRouteName='Home'
+      drawerContent={(props) => <MenuContent {...props} /> }
    >
-     <Drawer.Screen name='Page 1' component={TextPage} initialParams={{text: "To shewing another demands to. Marianne property cheerful informed at striking at. Clothes parlors however by cottage on. In views it or meant drift to. Be concern parlors settled or do shyness address. Remainder northward performed out for moonlight. Yet late add name was rent park from rich. He always do do former he highly."}} />
-     <Drawer.Screen name='Page 2' component={TextPage} initialParams={{text: "Neat own nor she said see walk. And charm add green you these. Sang busy in this drew ye fine. At greater prepare musical so attacks as on distant. Improving age our her cordially intention. His devonshire sufficient precaution say preference middletons insipidity. Since might water hence the her worse. Concluded it offending dejection do earnestly as me direction. Nature played thirty all him."}} />
-     <Drawer.Screen name='Tabs' component={TabPage} initialParams={
-      {tabs : [
-        {name: 'Tab 1', text: "Open know age use whom him than lady was. On lasted uneasy exeter my itself effect spirit. At design he vanity at cousin longer looked ye. Design praise me father an favour. As greatly replied it windows of an minuter behaved passage. Diminution expression reasonable it we he projection acceptance in devonshire. Perpetual it described at he applauded."}, 
-        {name: "Tab 2", text: "Are sentiments apartments decisively the especially alteration. Thrown shy denote ten ladies though ask saw. Or by to he going think order event music. Incommode so intention defective at convinced. Led income months itself and houses you. After nor you leave might share court balls."},
-        {name: "Tab 3", text: "His followed carriage proposal entrance directly had elegance. Greater for cottage gay parties natural. Remaining he furniture on he discourse suspected perpetual. Power dried her taken place day ought the. Four and our ham west miss. Education shameless who middleton agreement how. We in found world chief is at means weeks smile."},
-        ]}} />
+      <Drawer.Screen name="Home" component={HomeScreen} />
    </Drawer.Navigator>
   );
 }
@@ -114,7 +110,6 @@ function App(): React.JSX.Element {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
-
 
   return (
     <SafeAreaProvider>
