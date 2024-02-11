@@ -1,12 +1,11 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 import base from '../../config/base';
-import { DrawerScreenProps } from '@react-navigation/drawer';
-import { RootStackParamList } from '../../../App';
 import LinearGradient from 'react-native-linear-gradient';
 import { SvgUri } from 'react-native-svg';
 import { PokemonTypesColors } from '../../components/PokemonCard';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { useAppSelector } from '../../store/hooks';
+import { selectPokemon } from '../../store/counter/pokemonSlice';
 
 export interface IPokemonDetailScreenProps {
   name: string
@@ -14,19 +13,12 @@ export interface IPokemonDetailScreenProps {
   type: string
 }
 
-type Props = DrawerScreenProps<RootStackParamList>;
-
 const PokemonDetailScreen: React.FunctionComponent = () => {
-
-  if (!useAppSelector((state) => state.pokemon.value)) {
-    return <Text>Not Defined</Text>
+  const pokemon = useAppSelector(selectPokemon)
+  if (!pokemon) {
+    return <Text style={base.centered}>Not Defined</Text>
   }
-
-  const {name, image, type} = useAppSelector((state) => state.pokemon.value) as IPokemonDetailScreenProps
-
-  //const {name, image, type} = route.params as IPokemonDetailScreenProps
-
-  console.log(name)
+  const {name, image, type} = pokemon
 
   return (
     <LinearGradient

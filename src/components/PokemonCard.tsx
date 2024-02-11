@@ -1,32 +1,28 @@
-import { NavigationProp, useNavigation } from '@react-navigation/native';
-import React, { PropsWithChildren, useContext } from 'react';
+import React, { PropsWithChildren } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { SvgUri } from 'react-native-svg';
-import { RootStackParamList } from '../../App';
 import { useAppDispatch } from '../store/hooks';
 import { setPokemon } from '../store/counter/pokemonSlice';
-import { MaterialBottomTabNavigationProp } from 'react-native-paper';
 import { setIndex } from '../store/counter/bottomTabSlice';
+import { IPokemon } from '../services/pokemon';
 
 type IPokemonCardProps = PropsWithChildren<{
-    number: number
-    name: string
-    type: string
+    pokemon: IPokemon
 }>;
 
 const POKEMON_IMAGE_URL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/{id}.svg`
 
-function PokemonCard({children, number, name, type}: IPokemonCardProps): React.JSX.Element {
+function PokemonCard({children, pokemon}: IPokemonCardProps): React.JSX.Element {
     const dispatch = useAppDispatch()
 
-    const image = POKEMON_IMAGE_URL.replace('{id}', number.toString());
+    const image = POKEMON_IMAGE_URL.replace('{id}', pokemon.id.toString());
 
     const onPress = () => {
         dispatch(setPokemon({
-            name: name,
+            name: pokemon.name,
             image: image,
-            type: type
+            type: pokemon.types[0].type.name
         }))
         dispatch(setIndex(2))
     };
@@ -35,7 +31,7 @@ function PokemonCard({children, number, name, type}: IPokemonCardProps): React.J
         <TouchableOpacity style={[styles.button]} onPress={onPress}>
             <LinearGradient
                 key={'Card'}
-                colors={PokemonTypesColors[type.toUpperCase()]}
+                colors={PokemonTypesColors[pokemon.types[0].type.name.toUpperCase()]}
                 start={{x: 0, y: 0}}
                 end={{x: 1, y: 0}}
                 style={{flex: 1, borderRadius: 10, padding:15}}
@@ -43,16 +39,15 @@ function PokemonCard({children, number, name, type}: IPokemonCardProps): React.J
                 <View style={{flexDirection: 'row', flexWrap:'wrap', height:80}}>
                     <View style={{ flex:2}}>
                         <View style={{flex:1}}>
-                            <Text style={styles.titleText}>#{('000'+number).slice(-3)}</Text>
-                            <Text style={styles.titleText}>{name}</Text>
+                            <Text style={styles.titleText}>#{('000'+pokemon.id).slice(-3)}</Text>
+                            <Text style={styles.titleText}>{pokemon.name}</Text>
                         </View>
                         <View style={{flexDirection: 'row', flexWrap:'wrap'}}>
-                            <View style={styles.element}>
-                                <Text style={styles.text}>Grass</Text>
-                            </View>
-                            <View style={styles.element}>
-                                <Text style={styles.text}>Fighting</Text>
-                            </View>
+                            {pokemon.types.map(type => (
+                                <View style={styles.element} key={type.type.name}>
+                                    <Text style={styles.text}>{type.type.name}</Text>
+                                </View>
+                            ))}
                         </View>
                     </View>
                     <View style={{ flex:1}}>

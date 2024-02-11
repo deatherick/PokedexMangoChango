@@ -5,40 +5,17 @@ import { DrawerScreenProps } from '@react-navigation/drawer';
 import { RootStackParamList } from '../../../App';
 import PokemonCard from '../../components/PokemonCard';
 import LinearGradient from 'react-native-linear-gradient';
+import { useAppSelector } from '../../store/hooks';
+import { selectPokemonList } from '../../store/counter/pokemonListSlice';
 
 export interface IPokemonsListScreenProps {}
 
 type Props = DrawerScreenProps<RootStackParamList>;
 
-const DATA = [
-  {
-    number: 1,
-    name: 'Bulbasour',
-    type: 'Grass'
-  },
-  {
-    number: 39,
-    name: 'JigglyPuff',
-    type: 'Fairy'
-  },
-  {
-    number: 25,
-    name: 'Pikachu',
-    type: 'Electric'
-  },
-  {
-    number: 7,
-    name: 'Squirtle',
-    type: 'Water'
-  },
-  {
-    number: 37,
-    name: 'Vulpix',
-    type: 'Fire'
-  },
-];
-
 const PokemonsListScreen: React.FunctionComponent<Props> = ({navigation, route}) => {
+
+  const pokemonList = useAppSelector(selectPokemonList)
+
   return (
     <View style={[base.card]}>
       <LinearGradient
@@ -49,9 +26,9 @@ const PokemonsListScreen: React.FunctionComponent<Props> = ({navigation, route})
         style={{flex: 1}}
       >   
         <FlatList
-          data={DATA}
-          renderItem={({item}) => <PokemonCard number={item.number} name={item.name} type={item.type} />}
-          keyExtractor={item => item.number.toString()}
+          data={pokemonList}
+          renderItem={({item}) => <PokemonCard key={item.id} pokemon={item} />}
+          keyExtractor={item => item.id.toString()}
           contentContainerStyle={{paddingBottom:100}}
         />
       </LinearGradient>
