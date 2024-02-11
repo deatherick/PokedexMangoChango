@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, Text, TouchableOpacity, View} from 'react-native';
+import {FlatList, View} from 'react-native';
 import base from '../../config/base';
 import { DrawerScreenProps } from '@react-navigation/drawer';
 import { RootStackParamList } from '../../../App';

@@ -40,6 +40,7 @@ import { IAbilitiesListScreenProps } from './src/screens/Abilities/AbilitiesList
 import { IMovesListScreenProps } from './src/screens/Moves/MovesListScreen';
 import { IItemsListScreenProps } from './src/screens/Items/ItemsListScreen';
 import BottomTabContainer from './src/components/BottomTabContainer';
+import PokemonDetailScreen, { IPokemonDetailScreenProps } from './src/screens/Pokemons/PokemonDetailScreen';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -78,6 +79,7 @@ export type RootStackParamList = {
   'Moves': IMovesListScreenProps
   'Items': IItemsListScreenProps
   'Bottom': React.FunctionComponent
+  'PokemonDetailScreen': IPokemonDetailScreenProps
 };
 
 const Drawer = createDrawerNavigator<RootStackParamList>();
@@ -97,6 +99,7 @@ function MyDrawer() {
       drawerContent={(props) => <MenuContent {...props} /> }
    >
     <Drawer.Screen name="Bottom" options={{title:"Home"}} component={BottomTabContainer} />
+    <Drawer.Screen name="PokemonDetailScreen" component={PokemonDetailScreen} />
   </Drawer.Navigator>
   );
 }
