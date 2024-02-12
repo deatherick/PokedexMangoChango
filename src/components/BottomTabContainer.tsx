@@ -47,9 +47,12 @@ const BottomTabContainer = () => {
             borderBottomLeftRadius: 30,
             borderBottomRightRadius: 30,
             marginBottom:20,
-            height:80
+            height:80,
+            borderColor: '#AAAAAA',
+            borderBlockColor: '#AAAAAA',
+            borderStyle: 'solid',
+            borderWidth: 1
         }}
-        style={{borderColor: 'black'}}
         labeled={false}
     />
   );

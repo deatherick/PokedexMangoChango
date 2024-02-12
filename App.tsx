@@ -43,6 +43,7 @@ import PokemonDetailScreen, { IPokemonDetailScreenProps } from './src/screens/Po
 import { getPokemonAsync, IPokemon } from './src/services/pokemon';
 import { clearState, pushPokemonList } from './src/store/counter/pokemonListSlice';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { PokemonTypesColors } from './src/components/PokemonCard';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -82,6 +83,10 @@ export type RootStackParamList = {
   'Items': IItemsListScreenProps
   'Bottom': React.FunctionComponent
   'PokemonDetailScreen': IPokemonDetailScreenProps
+  'AboutTab': React.FunctionComponent
+  'StatsTab': React.FunctionComponent
+  'MovesTab': React.FunctionComponent
+  'EvolutionTab': React.FunctionComponent
 };
 
 const Drawer = createDrawerNavigator<RootStackParamList>();
@@ -96,6 +101,7 @@ function MyDrawer() {
         headerTitle:"Your Pokédex",
         headerStyle: {
           backgroundColor: '#78a7c2',
+          //backgroundColor:PokemonTypesColors['GRASS'][0]
         }}}
       initialRouteName='Bottom'
       drawerContent={(props) => <MenuContent {...props} /> }

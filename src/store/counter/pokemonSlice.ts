@@ -19,7 +19,8 @@ export const pokemonSlice = createSlice({
   initialState,
   reducers: {
     setPokemon: (state, action: PayloadAction<IPokemonDetailScreenProps>) => {
-      state.value = action.payload
+      action.payload.name = action.payload.name.charAt(0).toUpperCase() + action.payload.name.slice(1);
+      state.value = action.payload;
     }
   },
 })
