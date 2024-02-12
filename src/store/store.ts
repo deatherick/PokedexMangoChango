@@ -13,8 +13,8 @@ export const store = configureStore({
     pokemonList: pokemonListReducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-    immutableCheck: { warnAfter: 128 },
-    serializableCheck: { warnAfter: 128 },
+    immutableCheck: { warnAfter: 1000 },
+    serializableCheck: { warnAfter: 1000 },
   })
 })
 

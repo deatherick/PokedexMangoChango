@@ -19,11 +19,7 @@ function PokemonCard({children, pokemon}: IPokemonCardProps): React.JSX.Element 
     const image = POKEMON_IMAGE_URL.replace('{id}', pokemon.id.toString());
 
     const onPress = () => {
-        dispatch(setPokemon({
-            name: pokemon.name,
-            image: image,
-            type: pokemon.types[0].type.name
-        }))
+        dispatch(setPokemon(pokemon))
         dispatch(setIndex(2))
     };
 

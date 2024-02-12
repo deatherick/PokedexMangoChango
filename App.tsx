@@ -40,10 +40,8 @@ import { IMovesListScreenProps } from './src/screens/Moves/MovesListScreen';
 import { IItemsListScreenProps } from './src/screens/Items/ItemsListScreen';
 import BottomTabContainer from './src/components/BottomTabContainer';
 import PokemonDetailScreen, { IPokemonDetailScreenProps } from './src/screens/Pokemons/PokemonDetailScreen';
-import { getPokemonAsync, IPokemon } from './src/services/pokemon';
-import { clearState, pushPokemonList } from './src/store/counter/pokemonListSlice';
+import { clearState } from './src/store/counter/pokemonListSlice';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { PokemonTypesColors } from './src/components/PokemonCard';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -120,13 +118,6 @@ function App(): React.JSX.Element {
     const init = async () => {
       // …do multiple sync or async tasks
       dispatch(clearState());
-
-      [...Array(10).keys()].map(async (index)=> {
-        await getPokemonAsync(index + 1).then((pokemon) => {
-          dispatch(pushPokemonList(pokemon as IPokemon))
-        })
-      });
-   
     };
 
     init().finally(async () => {

@@ -9,11 +9,7 @@ import { selectPokemon } from '../../store/counter/pokemonSlice';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { RootStackParamList } from '../../../App';
 
-export interface IPokemonDetailScreenProps {
-  name: string
-  image: string
-  type: string
-}
+export interface IPokemonDetailScreenProps {}
 
 const TestRoute = () => <View style={base.centered}><Text>Test</Text></View>;
 
@@ -21,10 +17,11 @@ const Tab = createMaterialTopTabNavigator<RootStackParamList>();
 
 const PokemonDetailScreen: React.FunctionComponent = () => {
   const pokemon = useAppSelector(selectPokemon)
+  const image = useAppSelector((state) => state.pokemon.image)
   if (!pokemon) {
     return <View style={base.centered}><Text>No Pokemon selected</Text></View>
   }
-  const {name, image, type} = pokemon
+
   return (
       <View style={{flex:1, flexDirection: 'column', flexWrap:'wrap', backgroundColor:'white'}}>
         <View style={{
@@ -41,18 +38,17 @@ const PokemonDetailScreen: React.FunctionComponent = () => {
                 width={230}
                 height={230}
                 uri={image}
-        
             />
         </View>
         <View style={{ flex:1, flexBasis:'40%', flexGrow:0, flexShrink:0, flexDirection:'row'}}>
           <LinearGradient
-            colors={PokemonTypesColors[type.toUpperCase()]}
+            colors={PokemonTypesColors[pokemon.types[0].type.name.toUpperCase()]}
             start={{x: 0, y: 0}}
             end={{x: 0, y: 1}}
             style={{flex: 1}}
             >  
               <View style={{ flex:1, alignItems: 'center'}}>
-                <Text style={{color:'white', fontSize:28, fontWeight:'bold'}}>{ name }</Text>
+                <Text style={{color:'white', fontSize:28, fontWeight:'bold'}}>{ pokemon.name }</Text>
               </View>
           </LinearGradient>
         </View>

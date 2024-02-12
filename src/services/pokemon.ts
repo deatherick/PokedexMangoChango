@@ -31,7 +31,7 @@ export interface IType {
  * Fetches a random pokemon from the API.
  * @returns {Promise<IPokemon>} A promise that resolves to a random pokemon.
  */
-export async function getPokemonAsync(id: number){
+export async function getPokemonAsync(id: number): Promise<IPokemon | undefined>{
     try {
         const res = await fetch(POKEMON_ENDPOINT.replace('{id}', id.toString()));
         if (!res.ok) throw new Error('Error fetching pokemon data');
@@ -42,9 +42,21 @@ export async function getPokemonAsync(id: number){
     }
 }
 
+export async function getPokemonDataFromAPI(length:number, offset:number){
+    try {
+        const data = Array.from({length: length}, (_, i) => i + 1 + offset).map(async (index)=> {
+            return await getPokemonAsync(index) as IPokemon;
+        });
+        let res = await Promise.all(data)
+        return {res: res, offset: offset}
+    } catch (err) {
+        console.error(err);
+        return {res: undefined, offset: 0}
+    }
+}
+
 export function getPokemon(id: number) : IPokemon | undefined {
     try {
-        console.log('pokemon', id)
         fetch(POKEMON_ENDPOINT.replace('{id}', id.toString())).then(res => {
             if (!res.ok) throw new Error('Error fetching pokemon data')
             res.json().then(data => {

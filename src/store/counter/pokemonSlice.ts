@@ -1,26 +1,30 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
-import { IPokemonDetailScreenProps } from '../../screens/Pokemons/PokemonDetailScreen'
+import { IPokemon } from '../../services/pokemon'
 
 // Define a type for the slice state
 interface PokemonState {
-  value: IPokemonDetailScreenProps | null
+  value: IPokemon | null
+  image: string
 }
 
 // Define the initial state using that type
 const initialState: PokemonState = {
   value: null,
+  image: ''
 }
+
+const POKEMON_IMAGE_URL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/{id}.svg`
 
 export const pokemonSlice = createSlice({
   name: 'pokemon',
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
-    setPokemon: (state, action: PayloadAction<IPokemonDetailScreenProps>) => {
-      action.payload.name = action.payload.name.charAt(0).toUpperCase() + action.payload.name.slice(1);
+    setPokemon: (state, action: PayloadAction<IPokemon>) => {
       state.value = action.payload;
+      state.image = POKEMON_IMAGE_URL.replace('{id}', action.payload.id.toString());
     }
   },
 })
