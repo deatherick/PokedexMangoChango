@@ -16,7 +16,7 @@ export interface IPokemonDetailScreenProps {
 const PokemonDetailScreen: React.FunctionComponent = () => {
   const pokemon = useAppSelector(selectPokemon)
   if (!pokemon) {
-    return <Text style={base.centered}>Not Defined</Text>
+    return <View style={base.centered}><Text>No Pokemon selected</Text></View>
   }
   const {name, image, type} = pokemon
 

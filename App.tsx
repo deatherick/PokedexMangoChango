@@ -101,7 +101,7 @@ function MyDrawer() {
       drawerContent={(props) => <MenuContent {...props} /> }
    >
     <Drawer.Screen name="Bottom" options={{title:"Home"}} component={BottomTabContainer} />
-    <Drawer.Screen name="PokemonDetailScreen" component={PokemonDetailScreen} />
+    <Drawer.Screen name="PokemonDetailScreen" component={PokemonDetailScreen} options={{drawerItemStyle: { display: 'none' }}} />
   </Drawer.Navigator>
   );
 }
