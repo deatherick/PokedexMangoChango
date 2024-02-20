@@ -14,21 +14,14 @@ type Props = DrawerScreenProps<RootStackParamList>;
 
 const PokemonsListScreen: React.FunctionComponent<Props> = ({navigation, route}) => {
 
-  const {value:pokemons, status, offset} = useAppSelector((state) => state.pokemonList);
+  const {value:pokemons, offset} = useAppSelector((state) => state.pokemonList);
   const dispatch = useAppDispatch()
-  //const pokemonOrderedList = [...pokemonList].slice().sort((a,b) => a.id - b.id)
-
-  useEffect(() => {   
-    if (status == 'idle') {
-        //dispatch(getPokemonData({length: 10, offset:0}));
-    }
-  }, [status])
 
   useEffect(() => {
     return () => {
         dispatch(clearState());
     };
-}, [])
+  }, [])
 
   function appendData(): void {
     console.log('adding data');

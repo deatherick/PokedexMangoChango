@@ -7,13 +7,12 @@ import { PokemonTypesColors } from '../../components/PokemonCard';
 import { useAppSelector } from '../../store/hooks';
 import { selectPokemon } from '../../store/counter/pokemonSlice';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { RootStackParamList } from '../../../App';
 
 export interface IPokemonDetailScreenProps {}
 
 const TestRoute = () => <View style={base.centered}><Text>Test</Text></View>;
 
-const Tab = createMaterialTopTabNavigator<RootStackParamList>();
+const Tab = createMaterialTopTabNavigator();
 
 const PokemonDetailScreen: React.FunctionComponent = () => {
   const pokemon = useAppSelector(selectPokemon)
@@ -53,7 +52,35 @@ const PokemonDetailScreen: React.FunctionComponent = () => {
           </LinearGradient>
         </View>
         <View style={{ flex:1, backgroundColor:'white', marginTop:30, zIndex:2}}>
-  
+         {/*  <Tab.Navigator 
+            key={'DetailsTab'}
+            style={{backgroundColor:'white'}}
+            screenOptions={{
+              tabBarStyle:{
+                backgroundColor:'transparent',
+                marginLeft: 20,
+                marginRight: 20,
+                marginBottom:15,
+                height:40
+              },
+              tabBarItemStyle:{
+                padding: -4
+              },
+              tabBarLabelStyle: { 
+                fontSize: 14,
+                fontWeight: 'bold',
+                textTransform: 'capitalize',
+                color: PokemonTypesColors[pokemon.types[0].type.name.toUpperCase()][0]
+              },
+              tabBarIndicatorStyle:{
+                backgroundColor: PokemonTypesColors[pokemon.types[0].type.name.toUpperCase()][0]
+              }
+            }}> 
+              <Tab.Screen name='AboutTab' options={{title:'About'}} component={TestRoute} />
+              <Tab.Screen name='StatsTab' options={{title:'Stats'}} component={TestRoute} />
+              <Tab.Screen name='MovesTab' options={{title:'Moves'}} component={TestRoute} />
+              <Tab.Screen name='EvolutionTab' options={{title:'Evolution'}} component={TestRoute} />
+          </Tab.Navigator> */}
         </View>
       </View>
   );

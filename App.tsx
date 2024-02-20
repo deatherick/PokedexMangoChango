@@ -81,6 +81,9 @@ export type RootStackParamList = {
   'Items': IItemsListScreenProps
   'Bottom': React.FunctionComponent
   'PokemonDetailScreen': IPokemonDetailScreenProps
+};
+
+export type DetailsStackParamList = {
   'AboutTab': React.FunctionComponent
   'StatsTab': React.FunctionComponent
   'MovesTab': React.FunctionComponent

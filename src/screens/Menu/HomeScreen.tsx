@@ -16,6 +16,7 @@ type Props = DrawerScreenProps<RootStackParamList>;
 const HomeScreen: React.FunctionComponent<Props> = ({route, navigation}) => {
   return (
     <Tab.Navigator 
+    key={'HomeTab'}
     style={{backgroundColor:'white'}}
     screenOptions={{
       tabBarStyle:{
@@ -41,7 +42,7 @@ const HomeScreen: React.FunctionComponent<Props> = ({route, navigation}) => {
         <Tab.Screen name='Pokemons' component={PokemonsListScreen} /> 
         <Tab.Screen name='Abilities' component={AbilitiesListScreen} /> 
         <Tab.Screen name='Moves' component={MovesListScreen} /> 
-        <Tab.Screen name='Items' component={ItemsListScreen} /> 
+        <Tab.Screen name='Items' component={ItemsListScreen} />
     </Tab.Navigator>
   );
 };
