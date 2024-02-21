@@ -48,10 +48,10 @@ export async function getPokemonDataFromAPI(length:number, offset:number){
             return await getPokemonAsync(index) as IPokemon;
         });
         let res = await Promise.all(data)
-        return {res: res, offset: offset}
+        return {response: res, offset: offset}
     } catch (err) {
         console.error(err);
-        return {res: undefined, offset: 0}
+        throw err;
     }
 }
 

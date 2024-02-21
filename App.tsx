@@ -42,6 +42,7 @@ import BottomTabContainer from './src/components/BottomTabContainer';
 import PokemonDetailScreen, { IPokemonDetailScreenProps } from './src/screens/Pokemons/PokemonDetailScreen';
 import { clearState } from './src/store/counter/pokemonListSlice';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -135,16 +136,20 @@ function App(): React.JSX.Element {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
+  const queryClient = new QueryClient();
+
   return (
-    <SafeAreaProvider>
-        <NavigationContainer>
-          <MyDrawer/>
-        </NavigationContainer>
-        <StatusBar
-          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-          backgroundColor={backgroundStyle.backgroundColor}
-        />
-    </SafeAreaProvider>
+    <QueryClientProvider client={queryClient}>
+      <SafeAreaProvider>
+          <NavigationContainer>
+            <MyDrawer/>
+          </NavigationContainer>
+          <StatusBar
+            barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+            backgroundColor={backgroundStyle.backgroundColor}
+          />
+      </SafeAreaProvider>
+    </QueryClientProvider>
   );
 }
 

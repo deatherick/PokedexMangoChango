@@ -51,7 +51,7 @@ export const pokemonListSlice = createSlice({
     });
     builder.addCase(getPokemonData.fulfilled, (state, action) => {
       state.status = 'succeded'
-      state.value = state.value.concat(action.payload?.res as Array<IPokemon>).map(pokemon => {
+      state.value = state.value.concat(action.payload?.response as Array<IPokemon>).map(pokemon => {
         pokemon.name = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
         return pokemon
       })
